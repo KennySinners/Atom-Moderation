@@ -243,6 +243,7 @@ client.on('message', message => {
     .addField(`Fun Commands/Features`, ` \`a?help\` \n Brings up this embed`)
     .addField(` \`a?ping\` `, `Displays my ping`)
     .addField(` \`a?ascii\` `, `Transforms normal text into ASCII text`)
+    .addField(` \`a?av\` / \`a?avatar\` `, `Displays the avatar of the mentioned user, if there is no mentioned user the bot will display the avatar of the mesasge author`)
     .addBlankField()
     .addField(`**Moderation Commands**`, ` \`a?lock\` \n Locks down a specific channel`)
     .addField(` \`a?unlock\` `, `Unlocks a specific channel`)
@@ -371,6 +372,8 @@ client.on('message', message => {
     collector.on('collect', m => {
       announceEmbed.setDescription(m.content)
       collector.stop();
+      message.author.lastMessage.delete();
+      client.user.lastMessage.delete();
       announcementChannel.send(announceEmbed)
       })
      })
@@ -404,6 +407,16 @@ client.on('message', message => {
       .setDescription(`\nMy prefix is \`\`a?\`\` \n Need help? \n Do \`\`a?help\`\` `)
       .setFooter(`Atom!`, client.user.avatarURL)
       message.channel.send(mentionEmbed)
+    }
+    if(content.startsWith(client.prefix + 'avatar') || content.startsWith(client.prefix + 'av')){
+      const mUser = message.mentions.users.first() || client.users.get(id) || message.author;
+      const avatarEmbed = new Discord.RichEmbed()
+      .setColor("GRAY")
+      .setTitle(` \`\`\`${mUser.username}'s avatar\`\`\` `)
+      .setAuthor(`Atom Moderation`, client.user.avatarURL)
+      .setImage(`${mUser.avatarURL}`)
+      .setFooter(`Atom!`, client.user.avatarURL)
+      message.channel.send(avatarEmbed)
     }
 });
 
