@@ -1,0 +1,27 @@
+{
+  "name": "typescriptbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^11.11.7",
+    "balanced-match": "^1.0.0",
+    "better-sqlite3": "^5.4.0",
+    "cron": "^1.7.1",
+    "discord.js": "^11.5.0",
+    "dotenv": "^8.0.0",
+    "moment": "^2.24.0",
+    "node-gyp": "^4.0.0",
+    "quick.db": "^7.0.0-b22",
+    "rebuild": "^0.1.2",
+    "slot-machine": "^2.1.0",
+    "ytdl-core": "^0.29.2"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
+}
