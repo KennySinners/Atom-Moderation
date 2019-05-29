@@ -396,6 +396,15 @@ client.on('message', message => {
        })
       }
     }
+    if(message.isMentioned(client.user)){
+      const mentionEmbed = new Discord.RichEmbed()
+      .setColor("GRAY")
+      .setTitle(`${message.author.username} mentioned me!`)
+      .setAuthor('Atom Moderation', client.user.avatarURL)
+      .setDescription(`\nMy prefix is \`\`a?\`\` \n Need help? \n Do \`\`a?help\`\` `)
+      .setFooter(`Atom!`, client.user.avatarURL)
+      message.channel.send(mentionEmbed)
+    }
 });
 
 client.login(config.token)
