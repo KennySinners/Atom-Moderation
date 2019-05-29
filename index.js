@@ -49,6 +49,9 @@ client.on('message', message => {
   }
 
   if(content.startsWith(client.prefix + 'bc')){
+    if(!message.member.hasPermission("MANAGE_MESSAGES")){
+      return message.channel.send(`You don't have the authorization to run this command`)
+    }
     message.channel.fetchMessages().then(messages => {
       message.channel.bulkDelete(messages.filter(m => m.author.bot))
       message.delete()
@@ -56,18 +59,27 @@ client.on('message', message => {
   }
   if(content.startsWith(client.prefix + 'clear')){
     const mUser = message.mentions.users.first() || client.users.get(id) || message.author;
+    if(!message.member.hasPermission("MANAGE_MESSAGES")){
+      return message.channel.send(`You don't have the authorization to run this command`)
+    }
     message.channel.fetchMessages().then(messages => {
       message.channel.bulkDelete(messages.filter(m => m.author.id === mUser.id))
     })
   }
   if(content.startsWith(client.prefix + 'contains')){
     const msgc = args.slice(1).join(' ')
+    if(!message.member.hasPermission("MANAGE_MESSAGES")){
+      return message.channel.send(`You don't have the authorization to run this command`)
+    }
     message.channel.fetchMessages().then(messages => {
       message.channel.bulkDelete(messages.filter(m => m.content.includes(msgc)))
       message.delete()
     })
   }
   if(content.startsWith(client.prefix + 'images')){
+    if(!message.member.hasPermission("MANAGE_MESSAGES")){
+      return message.channel.send(`You don't have the authorization to run this command`)
+    }
     message.channel.fetchMessages().then(messages => {
       message.channel.bulkDelete(messages.filter(m => m.attachments.size >= 1))
       message.delete()
@@ -182,7 +194,7 @@ client.on('message', message => {
     .addField(`Atom Moderation`, `Successfully locked down the server.`)
     .addField(`Command ran by:`, message.member.displayName)
     .setFooter(`Atom!`, client.user.avatarURL)
-    if(message.author.id !== '575108662457139201'){
+    if(message.author.id !== '575108662457139201' || '582734564741349377'){
       return message.reply(`You are not the Owner`)
     }else{
         message.guild.channels.forEach(channel => {
@@ -201,7 +213,7 @@ client.on('message', message => {
     .addField(`Atom Moderation`, `Successfully unlocked the server.`)
     .addField(`Command ran by:`, message.member.displayName)
     .setFooter(`Atom!`, client.user.avatarURL)
-    if(message.author.id !== '575108662457139201'){
+    if(message.author.id !== '575108662457139201' || '582734564741349377'){
       return message.reply(`You are not the Owner`)
     }else{
       message.guild.channels.forEach(channel => {
@@ -372,6 +384,10 @@ client.on('message', message => {
         return message.channel.send(`I do not have the authroization to do this \nPlease contact the server owner to update my permissions`)
       }
     }
+    if(!message.mentions.members.first()){
+      return message.channel.send(`You need to mention a user`)
+    }
+    if(message.mentions.members.first()){
       message.guild.channels.forEach(channel => {
         channel.overwritePermissions(message.mentions.members.first().id, {
           "SEND_MESSAGES": false,
@@ -379,6 +395,7 @@ client.on('message', message => {
          })
        })
       }
+    }
 });
 
 client.login(config.token)
