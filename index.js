@@ -363,6 +363,22 @@ client.on('message', message => {
       })
      })
     }
+    if(content.startsWith(client.prefix + "userlock")){
+      const mUser = message.mentions.users.first() || client.users.get(id);
+      if(!message.member.hasPermission("MANAGE_SERVER")){
+        return message.channel.send(`You do not have the authorization to do this`)
+      }else {
+      if(!client.member.hasPermission("MANAGE_CHANNELS")){
+        return message.channel.send(`I do not have the authroization to do this \nPlease contact the server owner to update my permissions`)
+      }
+    }
+      message.guild.channels.forEach(channel => {
+        channel.overwritePermissions(message.mentions.members.first().id, {
+          "SEND_MESSAGES": false,
+          "READ_MESSAGES": false
+         })
+       })
+      }
 });
 
 client.login(config.token)
