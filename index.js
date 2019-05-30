@@ -17,6 +17,28 @@ client.on('message', message => {
   if(message.author.bot){
     return;
   }
+  const commands = [
+    "avatar",
+    "av",
+    "embed",
+    "serverlock",
+    "ping",
+    "serverunlock",
+    "lock",
+    "unlock",
+    "bc",
+    "images",
+    "contains",
+    "clear",
+    "set",
+    "mute",
+    "unmute",
+    "kick",
+    "ban",
+    "help",
+    "users",
+    "userlock"
+  ];
   const args = message.content.split(' ')
   const id = args[0];
   const dev = client.users.get('575108662457139201')
