@@ -125,7 +125,7 @@ client.on('message', message => {
       .addField(`Command ran by:`, message.member.displayName)
       .setFooter(`Atom!`, client.user.avatarURL)
       message.channel.send(lockE)
-    }
+     }
     }
     if(content.startsWith(client.prefix + 'unlock')){
       const mRole = message.guild.roles.get('582798972247343104')
@@ -216,7 +216,7 @@ client.on('message', message => {
     .addField(`Atom Moderation`, `Successfully locked down the server.`)
     .addField(`Command ran by:`, message.member.displayName)
     .setFooter(`Atom!`, client.user.avatarURL)
-    if(message.author.id !== '575108662457139201' || '582734564741349377'){
+    if(message.author.id !== '575108662457139201'){
       return message.reply(`You are not the Owner`)
     }else{
         message.guild.channels.forEach(channel => {
@@ -235,7 +235,7 @@ client.on('message', message => {
     .addField(`Atom Moderation`, `Successfully unlocked the server.`)
     .addField(`Command ran by:`, message.member.displayName)
     .setFooter(`Atom!`, client.user.avatarURL)
-    if(message.author.id !== '575108662457139201' || '582734564741349377'){
+    if(message.author.id !== '575108662457139201'){
       return message.reply(`You are not the Owner`)
     }else{
       message.guild.channels.forEach(channel => {
